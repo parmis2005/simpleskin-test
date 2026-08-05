@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-cream: #FAF8F4;
+  --color-sand: #F1ECE1;
+  --color-sage: #7C9082;
+  --color-sage-dark: #5C7263;
+  --color-gold: #B89B6B;
+  --color-charcoal: #2B2B28;
+  --color-charcoal-light: #5C5C57;
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-lato);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FAF8F4;
+  color: #2B2B28;
+  font-family: var(--font-lato), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), serif;
+}
+
+.section-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #7C9082, #B89B6B);
+  margin: 0 auto;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 14px 36px;
+  background: linear-gradient(135deg, #7C9082, #5C7263);
+  color: white;
+  font-family: var(--font-lato), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #5C7263, #445247);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(124, 144, 130, 0.4);
+}
+
+.btn-outline {
+  display: inline-block;
+  padding: 13px 35px;
+  background: transparent;
+  color: white;
+  font-family: var(--font-lato), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background: white;
+  color: #2B2B28;
+}
+
+.btn-outline-dark {
+  display: inline-block;
+  padding: 13px 35px;
+  background: transparent;
+  color: #2B2B28;
+  font-family: var(--font-lato), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1.5px solid rgba(43,43,40,0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-outline-dark:hover {
+  background: #2B2B28;
+  color: white;
+  border-color: #2B2B28;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
