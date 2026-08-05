@@ -4,7 +4,7 @@ const galleryImages = [
 
 export default function GallerySection() {
   return (
-    <section id="galerie" className="bg-white py-24 px-6">
+    <section id="galerie" className="bg-white pt-32 pb-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-xs tracking-[4px] uppercase text-sage mb-4">Galerie</p>

@@ -1,6 +1,6 @@
 export default function AboutSection() {
   return (
-    <section id="ueber-mich" className="bg-cream py-24 px-6 overflow-hidden">
+    <section id="ueber-mich" className="bg-cream pt-32 pb-24 px-6 overflow-hidden">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         {/* Image */}
         <div className="relative">

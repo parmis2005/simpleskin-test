@@ -9,7 +9,7 @@ const ingredients = [
 
 export default function ProductsSection() {
   return (
-    <section id="produkte" className="bg-charcoal py-24 px-6 overflow-hidden">
+    <section id="produkte" className="bg-charcoal pt-32 pb-24 px-6 overflow-hidden">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         {/* Text */}
         <div>

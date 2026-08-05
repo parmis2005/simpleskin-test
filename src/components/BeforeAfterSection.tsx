@@ -1,6 +1,6 @@
 export default function BeforeAfterSection() {
   return (
-    <section id="vorher-nachher" className="bg-sand py-24 px-6">
+    <section id="vorher-nachher" className="bg-sand pt-32 pb-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-xs tracking-[4px] uppercase text-sage mb-4">

@@ -9,7 +9,7 @@ const hours = [
 
 export default function ContactSection() {
   return (
-    <section id="kontakt" className="bg-charcoal py-24 px-6">
+    <section id="kontakt" className="bg-charcoal pt-32 pb-24 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
@@ -107,10 +107,10 @@ export default function ContactSection() {
         </div>
 
         {/* Map */}
-        <div className="mt-16 aspect-[16/6] bg-white/5 border border-white/10 flex items-center justify-center relative overflow-hidden">
+        <div className="mt-16 aspect-[16/6] bg-white/5 border border-white/10 flex items-center justify-center relative overflow-hidden rounded-sm">
           <iframe
             src="https://www.google.com/maps?q=Zschockersche+Stra%C3%9Fe+57,+04229+Leipzig&output=embed"
-            className="w-full h-full grayscale opacity-70"
+            className="w-full h-full"
             style={{ border: 0 }}
             allowFullScreen
             loading="lazy"

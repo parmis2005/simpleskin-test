@@ -2,19 +2,26 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, MessageCircle } from "lucide-react";
 
 const navLinks = [
-  { href: "#behandlungen", label: "Behandlungen" },
-  { href: "#ueber-mich", label: "Über Mich" },
-  { href: "#vorher-nachher", label: "Vorher / Nachher" },
-  { href: "#galerie", label: "Galerie" },
-  { href: "#kontakt", label: "Kontakt" },
+  { href: "/behandlungen", label: "Behandlungen" },
+  { href: "/ueber-mich", label: "Über Mich" },
+  { href: "/vorher-nachher", label: "Vorher / Nachher" },
+  { href: "/galerie", label: "Galerie" },
+  { href: "/produkte", label: "Produkte" },
+  { href: "/kontakt", label: "Kontakt" },
 ];
+
+const BOOKING_URL = "https://www.studiobookr.com/simple-skin-kosmetik-69919#/book";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const solid = isScrolled || !isHome;
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 60);
@@ -25,7 +32,7 @@ export default function Navigation() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
+        solid
           ? "bg-white/95 backdrop-blur-md shadow-sm py-3"
           : "bg-transparent py-6"
       }`}
@@ -35,14 +42,14 @@ export default function Navigation() {
         <Link href="/" className="flex flex-col leading-none">
           <span
             className={`font-heading text-2xl font-semibold tracking-wide transition-colors ${
-              isScrolled ? "text-charcoal" : "text-white"
+              solid ? "text-charcoal" : "text-white"
             }`}
           >
             Simple Skin
           </span>
           <span
             className={`text-xs tracking-[3px] uppercase mt-0.5 transition-colors ${
-              isScrolled ? "text-sage-dark" : "text-sage/90"
+              solid ? "text-sage-dark" : "text-sage/90"
             }`}
           >
             Leipzig · Plagwitz
@@ -51,18 +58,30 @@ export default function Navigation() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={`text-xs font-body tracking-[2px] uppercase transition-colors hover:text-sage ${
-                isScrolled ? "text-charcoal-light" : "text-white/90"
-              }`}
-            >
-              {link.label}
-            </a>
-          ))}
-          <a href="#termin" className="btn-primary text-xs">
+          {navLinks.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-xs font-body tracking-[2px] uppercase transition-colors hover:text-sage ${
+                  active
+                    ? "text-sage"
+                    : solid
+                    ? "text-charcoal-light"
+                    : "text-white/90"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary text-xs"
+          >
             Termin buchen
           </a>
         </nav>
@@ -74,9 +93,9 @@ export default function Navigation() {
           aria-label="Menü öffnen"
         >
           {menuOpen ? (
-            <X className={isScrolled ? "text-charcoal" : "text-white"} size={24} />
+            <X className={solid ? "text-charcoal" : "text-white"} size={24} />
           ) : (
-            <Menu className={isScrolled ? "text-charcoal" : "text-white"} size={24} />
+            <Menu className={solid ? "text-charcoal" : "text-white"} size={24} />
           )}
         </button>
       </div>
@@ -86,17 +105,21 @@ export default function Navigation() {
         <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-xl py-8 px-6">
           <nav className="flex flex-col gap-6">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="text-xs tracking-[2px] uppercase text-charcoal-light hover:text-sage transition-colors"
+                className={`text-xs tracking-[2px] uppercase transition-colors hover:text-sage ${
+                  pathname === link.href ? "text-sage" : "text-charcoal-light"
+                }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <a
-              href="#termin"
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}
               className="btn-primary text-center text-xs mt-2"
             >
