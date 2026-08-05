@@ -1,14 +1,13 @@
-import OrchidIllustration from "./OrchidIllustration";
-
 export default function CTABanner() {
   return (
-    <section
-      id="termin"
-      className="relative py-24 px-6 overflow-hidden bg-gradient-to-br from-charcoal via-charcoal to-sage-dark"
-    >
-      {/* Decorative orchids */}
-      <OrchidIllustration className="absolute -right-16 top-1/2 -translate-y-1/2 w-[380px] h-[380px] text-white/[0.06] hidden md:block" />
-      <OrchidIllustration className="absolute -left-20 -bottom-16 w-[280px] h-[280px] text-sage/10 hidden lg:block rotate-[15deg]" />
+    <section id="termin" className="relative py-24 px-6 overflow-hidden">
+      {/* Background */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-fixed"
+        style={{ backgroundImage: "url('/images/orchid-bg.jpg')" }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-charcoal/75 via-charcoal/55 to-charcoal/80" />
+      <div className="absolute inset-0 bg-sage-dark/20" />
 
       <div className="relative z-10 max-w-3xl mx-auto text-center text-white">
         <p className="text-xs tracking-[5px] uppercase text-gold/90 mb-5">
