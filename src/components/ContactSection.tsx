@@ -1,4 +1,4 @@
-import { MapPin, MessageCircle, Clock, Bus } from "lucide-react";
+import { MapPin, MessageCircle, Clock, Bus, Phone, Mail } from "lucide-react";
 
 const hours = [
   { day: "Dienstag – Mittwoch", time: "13:00 – 19:00 Uhr" },
@@ -31,7 +31,7 @@ export default function ContactSection() {
               <h3 className="font-heading text-lg text-white">Adresse</h3>
             </div>
             <p className="text-white/60 text-sm leading-relaxed">
-              Zschockersche Straße 57
+              Zschochersche Straße 57
               <br />
               04229 Leipzig-Plagwitz
             </p>
@@ -44,7 +44,7 @@ export default function ContactSection() {
               </p>
             </div>
             <a
-              href="https://maps.google.com/?q=Zschockersche+Str.+57+04229+Leipzig"
+              href="https://maps.google.com/?q=Zschochersche+Str.+57+04229+Leipzig"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-block text-xs tracking-[2px] uppercase text-sage hover:text-sage/70 transition-colors border-b border-sage/40 pb-0.5"
@@ -69,6 +69,24 @@ export default function ContactSection() {
                   className="text-white/60 text-sm hover:text-white transition-colors"
                 >
                   0176 / 70314898 (WhatsApp)
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone size={14} className="text-sage/60" />
+                <a
+                  href="tel:+493414926110"
+                  className="text-white/60 text-sm hover:text-white transition-colors"
+                >
+                  0341 / 4926110
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail size={14} className="text-sage/60" />
+                <a
+                  href="mailto:carmen-daebritz@web.de"
+                  className="text-white/60 text-sm hover:text-white transition-colors"
+                >
+                  carmen-daebritz@web.de
                 </a>
               </div>
             </div>
@@ -109,7 +127,7 @@ export default function ContactSection() {
         {/* Map */}
         <div className="mt-16 aspect-[16/6] bg-white/5 border border-white/10 flex items-center justify-center relative overflow-hidden rounded-sm">
           <iframe
-            src="https://www.google.com/maps?q=Zschockersche+Stra%C3%9Fe+57,+04229+Leipzig&output=embed"
+            src="https://www.google.com/maps?q=Zschochersche+Stra%C3%9Fe+57,+04229+Leipzig&output=embed"
             className="w-full h-full"
             style={{ border: 0 }}
             allowFullScreen

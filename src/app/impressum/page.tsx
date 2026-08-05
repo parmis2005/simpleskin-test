@@ -21,9 +21,9 @@ export default function Impressum() {
               <p>
                 Carmen Däbritz
                 <br />
-                Simple Skin – Kosmetik & Hautgesundheit
+                Simple Skin Kosmetik
                 <br />
-                Zschockersche Straße 57
+                Zschochersche Straße 57
                 <br />
                 04229 Leipzig
               </p>
@@ -31,7 +31,26 @@ export default function Impressum() {
 
             <section>
               <h2 className="font-heading text-lg text-charcoal mb-2">Kontakt</h2>
-              <p>WhatsApp / Telefon: 0176 / 70314898</p>
+              <p>
+                Telefon: 0341 4926110
+                <br />
+                WhatsApp: 0176 / 70314898
+                <br />
+                E-Mail: carmen-daebritz@web.de
+              </p>
+            </section>
+
+            <section>
+              <h2 className="font-heading text-lg text-charcoal mb-2">
+                Berufsbezeichnung und berufsrechtliche Regelungen
+              </h2>
+              <p>
+                Berufsbezeichnung: Kosmetikerin
+                <br />
+                Zuständige Kammer: Handwerkskammer zu Leipzig
+                <br />
+                Verliehen in: Deutschland
+              </p>
             </section>
 
             <section>
@@ -41,10 +60,17 @@ export default function Impressum() {
               <p>Carmen Däbritz, Anschrift wie oben.</p>
             </section>
 
-            <p className="text-xs text-charcoal-light/60 pt-6">
-              Bitte ergänze diese Seite um deine vollständigen, rechtlich erforderlichen
-              Angaben (z. B. USt-IdNr., Berufsbezeichnung, zuständige Kammer, EU-Streitschlichtung).
-            </p>
+            <section>
+              <h2 className="font-heading text-lg text-charcoal mb-2">
+                EU-Streitschlichtung
+              </h2>
+              <p>
+                Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung
+                (OS) bereit. Wir sind nicht bereit oder verpflichtet, an
+                Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+                teilzunehmen.
+              </p>
+            </section>
           </div>
         </div>
       </main>

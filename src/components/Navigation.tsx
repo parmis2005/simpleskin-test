@@ -7,8 +7,10 @@ import { Menu, X, MessageCircle } from "lucide-react";
 
 const navLinks = [
   { href: "/behandlungen", label: "Behandlungen" },
+  { href: "/analysen", label: "Analysen" },
   { href: "/ueber-mich", label: "Über Mich" },
   { href: "/vorher-nachher", label: "Vorher / Nachher" },
+  { href: "/erfahrungsberichte", label: "Erfahrungsberichte" },
   { href: "/galerie", label: "Galerie" },
   { href: "/produkte", label: "Produkte" },
   { href: "/kontakt", label: "Kontakt" },
@@ -57,14 +59,14 @@ export default function Navigation() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden xl:flex items-center gap-5">
           {navLinks.map((link) => {
             const active = pathname === link.href;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-xs font-body tracking-[2px] uppercase transition-colors hover:text-sage ${
+                className={`text-[11px] font-body tracking-[1.5px] uppercase whitespace-nowrap transition-colors hover:text-sage ${
                   active
                     ? "text-sage"
                     : solid
@@ -80,7 +82,7 @@ export default function Navigation() {
             href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary text-xs"
+            className="btn-primary text-xs whitespace-nowrap"
           >
             Termin buchen
           </a>
@@ -88,7 +90,7 @@ export default function Navigation() {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden"
+          className="xl:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menü öffnen"
         >
@@ -102,7 +104,7 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-xl py-8 px-6">
+        <div className="xl:hidden absolute top-full left-0 right-0 bg-white shadow-xl py-8 px-6 max-h-[80vh] overflow-y-auto">
           <nav className="flex flex-col gap-6">
             {navLinks.map((link) => (
               <Link

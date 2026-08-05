@@ -9,7 +9,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="flex gap-8">
+        <div className="flex flex-wrap justify-center gap-x-8 gap-y-2">
           <a
             href="/impressum"
             className="text-white/30 text-xs tracking-[1px] uppercase hover:text-white/60 transition-colors"
@@ -23,7 +23,13 @@ export default function Footer() {
             Datenschutz
           </a>
           <a
-            href="#kontakt"
+            href="/agb"
+            className="text-white/30 text-xs tracking-[1px] uppercase hover:text-white/60 transition-colors"
+          >
+            AGB
+          </a>
+          <a
+            href="/kontakt"
             className="text-white/30 text-xs tracking-[1px] uppercase hover:text-white/60 transition-colors"
           >
             Kontakt

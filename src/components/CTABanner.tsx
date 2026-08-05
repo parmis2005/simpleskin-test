@@ -40,7 +40,7 @@ export default function CTABanner() {
         </div>
 
         <p className="text-white/50 text-xs mt-8 tracking-wide">
-          Tel/WhatsApp: 0176 / 70314898 · Zschockersche Straße 57, 04229 Leipzig
+          Tel/WhatsApp: 0176 / 70314898 · Zschochersche Straße 57, 04229 Leipzig
         </p>
       </div>
     </section>
