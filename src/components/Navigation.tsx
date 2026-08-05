@@ -3,17 +3,30 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle, ChevronDown } from "lucide-react";
 
-const navLinks = [
-  { href: "/behandlungen", label: "Behandlungen" },
-  { href: "/analysen", label: "Analysen" },
-  { href: "/ueber-mich", label: "Über Mich" },
-  { href: "/vorher-nachher", label: "Vorher / Nachher" },
-  { href: "/erfahrungsberichte", label: "Erfahrungsberichte" },
-  { href: "/galerie", label: "Galerie" },
-  { href: "/produkte", label: "Produkte" },
-  { href: "/kontakt", label: "Kontakt" },
+type NavItem = { href: string; label: string };
+type NavEntry = { label: string; href?: string; items?: NavItem[] };
+
+const navEntries: NavEntry[] = [
+  {
+    label: "Behandlungen",
+    items: [
+      { href: "/behandlungen", label: "Alle Behandlungen" },
+      { href: "/analysen", label: "Analysen & Beratung" },
+    ],
+  },
+  { label: "Über Mich", href: "/ueber-mich" },
+  {
+    label: "Ergebnisse",
+    items: [
+      { href: "/vorher-nachher", label: "Vorher / Nachher" },
+      { href: "/erfahrungsberichte", label: "Erfahrungsberichte" },
+      { href: "/galerie", label: "Galerie" },
+    ],
+  },
+  { label: "Produkte", href: "/produkte" },
+  { label: "Kontakt", href: "/kontakt" },
 ];
 
 const BOOKING_URL = "https://www.studiobookr.com/simple-skin-kosmetik-69919#/book";
@@ -21,6 +34,8 @@ const BOOKING_URL = "https://www.studiobookr.com/simple-skin-kosmetik-69919#/boo
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const [openMobileGroup, setOpenMobileGroup] = useState<string | null>(null);
   const pathname = usePathname();
   const isHome = pathname === "/";
   const solid = isScrolled || !isHome;
@@ -30,6 +45,11 @@ export default function Navigation() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const isEntryActive = (entry: NavEntry) =>
+    entry.href
+      ? pathname === entry.href
+      : entry.items?.some((i) => i.href === pathname) ?? false;
 
   return (
     <header
@@ -59,23 +79,50 @@ export default function Navigation() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden xl:flex items-center gap-5">
-          {navLinks.map((link) => {
-            const active = pathname === link.href;
+        <nav className="hidden lg:flex items-center gap-9">
+          {navEntries.map((entry) => {
+            const active = isEntryActive(entry);
+            const linkClass = `text-xs font-body tracking-[2px] uppercase whitespace-nowrap transition-colors hover:text-sage ${
+              active ? "text-sage" : solid ? "text-charcoal-light" : "text-white/90"
+            }`;
+
+            if (!entry.items) {
+              return (
+                <Link key={entry.label} href={entry.href!} className={linkClass}>
+                  {entry.label}
+                </Link>
+              );
+            }
+
             return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-[11px] font-body tracking-[1.5px] uppercase whitespace-nowrap transition-colors hover:text-sage ${
-                  active
-                    ? "text-sage"
-                    : solid
-                    ? "text-charcoal-light"
-                    : "text-white/90"
-                }`}
+              <div
+                key={entry.label}
+                className="relative"
+                onMouseEnter={() => setOpenGroup(entry.label)}
+                onMouseLeave={() => setOpenGroup(null)}
               >
-                {link.label}
-              </Link>
+                <button className={`flex items-center gap-1 ${linkClass}`}>
+                  {entry.label}
+                  <ChevronDown size={12} />
+                </button>
+                {openGroup === entry.label && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4">
+                    <div className="bg-white shadow-xl rounded-sm py-2 min-w-[200px]">
+                      {entry.items.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className={`block px-5 py-3 text-xs tracking-[1px] uppercase whitespace-nowrap transition-colors hover:bg-cream hover:text-sage ${
+                            pathname === item.href ? "text-sage" : "text-charcoal-light"
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             );
           })}
           <a
@@ -90,7 +137,7 @@ export default function Navigation() {
 
         {/* Mobile menu button */}
         <button
-          className="xl:hidden"
+          className="lg:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menü öffnen"
         >
@@ -104,30 +151,70 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="xl:hidden absolute top-full left-0 right-0 bg-white shadow-xl py-8 px-6 max-h-[80vh] overflow-y-auto">
-          <nav className="flex flex-col gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className={`text-xs tracking-[2px] uppercase transition-colors hover:text-sage ${
-                  pathname === link.href ? "text-sage" : "text-charcoal-light"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-xl py-8 px-6 max-h-[80vh] overflow-y-auto">
+          <nav className="flex flex-col gap-1">
+            {navEntries.map((entry) => {
+              if (!entry.items) {
+                return (
+                  <Link
+                    key={entry.label}
+                    href={entry.href!}
+                    onClick={() => setMenuOpen(false)}
+                    className={`py-3 text-xs tracking-[2px] uppercase transition-colors hover:text-sage ${
+                      pathname === entry.href ? "text-sage" : "text-charcoal-light"
+                    }`}
+                  >
+                    {entry.label}
+                  </Link>
+                );
+              }
+
+              const expanded = openMobileGroup === entry.label;
+              return (
+                <div key={entry.label}>
+                  <button
+                    onClick={() =>
+                      setOpenMobileGroup(expanded ? null : entry.label)
+                    }
+                    className={`w-full flex items-center justify-between py-3 text-xs tracking-[2px] uppercase transition-colors ${
+                      isEntryActive(entry) ? "text-sage" : "text-charcoal-light"
+                    }`}
+                  >
+                    {entry.label}
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform ${expanded ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {expanded && (
+                    <div className="flex flex-col pl-4 pb-2">
+                      {entry.items.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          onClick={() => setMenuOpen(false)}
+                          className={`py-2 text-xs tracking-[1px] uppercase transition-colors hover:text-sage ${
+                            pathname === item.href ? "text-sage" : "text-charcoal-light/70"
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
             <a
               href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}
-              className="btn-primary text-center text-xs mt-2"
+              className="btn-primary text-center text-xs mt-4"
             >
               Termin buchen
             </a>
-            <div className="flex items-center gap-2 text-charcoal-light pt-2 border-t border-gray-100">
+            <div className="flex items-center gap-2 text-charcoal-light pt-4 mt-2 border-t border-gray-100">
               <MessageCircle size={14} className="text-sage" />
               <a
                 href="https://wa.me/4917670314898"
