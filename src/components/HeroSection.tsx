@@ -54,8 +54,8 @@ export default function HeroSection() {
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          Medizinisch-dermazeutische Wirkstoffkosmetik, effektive Gerätetechnologie,
-          digitale Hautanalysen und ganzheitliche Gesundheitsberatung in Leipzig-Plagwitz.
+          Wirkstoffkosmetik, Gerätetechnologie und digitale Hautanalyse in
+          Leipzig-Plagwitz.
         </p>
 
         <div
