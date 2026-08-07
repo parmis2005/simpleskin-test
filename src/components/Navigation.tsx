@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, MessageCircle, ChevronDown } from "lucide-react";
+import { useBookingModal } from "./BookingModalContext";
 
 type NavItem = { href: string; label: string };
 type NavEntry = { label: string; href?: string; items?: NavItem[] };
@@ -29,9 +30,8 @@ const navEntries: NavEntry[] = [
   { label: "Kontakt", href: "/kontakt" },
 ];
 
-const BOOKING_URL = "https://www.studiobookr.com/simple-skin-kosmetik-69919#/book";
-
 export default function Navigation() {
+  const { openBookingModal } = useBookingModal();
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
@@ -125,14 +125,12 @@ export default function Navigation() {
               </div>
             );
           })}
-          <a
-            href={BOOKING_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => openBookingModal()}
             className="btn-primary text-xs whitespace-nowrap"
           >
             Termin buchen
-          </a>
+          </button>
         </nav>
 
         {/* Mobile menu button */}
@@ -205,15 +203,15 @@ export default function Navigation() {
                 </div>
               );
             })}
-            <a
-              href={BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMenuOpen(false)}
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                openBookingModal();
+              }}
               className="btn-primary text-center text-xs mt-4"
             >
               Termin buchen
-            </a>
+            </button>
             <div className="flex items-center gap-2 text-charcoal-light pt-4 mt-2 border-t border-gray-100">
               <MessageCircle size={14} className="text-sage" />
               <a

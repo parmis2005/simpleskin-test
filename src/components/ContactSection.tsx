@@ -1,4 +1,7 @@
+"use client";
+
 import { MapPin, MessageCircle, Clock, Bus, Phone, Mail } from "lucide-react";
+import { useBookingModal } from "./BookingModalContext";
 
 const hours = [
   { day: "Dienstag – Mittwoch", time: "13:00 – 19:00 Uhr" },
@@ -8,6 +11,8 @@ const hours = [
 ];
 
 export default function ContactSection() {
+  const { openBookingModal } = useBookingModal();
+
   return (
     <section id="kontakt" className="bg-charcoal pt-32 pb-24 px-6">
       <div className="max-w-6xl mx-auto">
@@ -94,14 +99,12 @@ export default function ContactSection() {
               Am besten erreichst du mich per WhatsApp. Terminvergabe bitte
               ausschließlich online über den Buchungslink.
             </p>
-            <a
-              href="https://www.studiobookr.com/simple-skin-kosmetik-69919#/book"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => openBookingModal()}
               className="mt-4 inline-block text-xs tracking-[2px] uppercase text-sage hover:text-sage/70 transition-colors border-b border-sage/40 pb-0.5"
             >
               Online Termin buchen
-            </a>
+            </button>
           </div>
 
           {/* Hours */}

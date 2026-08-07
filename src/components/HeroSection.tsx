@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { useBookingModal } from "./BookingModalContext";
 
 export default function HeroSection() {
+  const { openBookingModal } = useBookingModal();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -63,9 +65,9 @@ export default function HeroSection() {
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <a href="#termin" className="btn-primary">
+          <button onClick={() => openBookingModal()} className="btn-primary">
             Termin buchen
-          </a>
+          </button>
           <a href="#behandlungen" className="btn-outline">
             Unsere Behandlungen
           </a>

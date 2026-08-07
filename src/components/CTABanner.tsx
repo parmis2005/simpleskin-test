@@ -1,4 +1,10 @@
+"use client";
+
+import { useBookingModal } from "./BookingModalContext";
+
 export default function CTABanner() {
+  const { openBookingModal } = useBookingModal();
+
   return (
     <section id="termin" className="relative py-24 px-6 overflow-hidden">
       {/* Background */}
@@ -22,14 +28,9 @@ export default function CTABanner() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="https://www.studiobookr.com/simple-skin-kosmetik-69919#/book"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary"
-          >
+          <button onClick={() => openBookingModal()} className="btn-primary">
             Online Termin buchen
-          </a>
+          </button>
           <a
             href="https://wa.me/4917670314898"
             target="_blank"

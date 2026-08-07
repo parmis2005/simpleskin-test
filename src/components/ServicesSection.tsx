@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useBookingModal } from "./BookingModalContext";
 
 const services = [
   {
@@ -73,6 +76,8 @@ const services = [
 ];
 
 export default function ServicesSection() {
+  const { openBookingModal } = useBookingModal();
+
   return (
     <section id="behandlungen" className="bg-white pt-32 pb-24 px-6">
       <div className="max-w-6xl mx-auto">
@@ -148,9 +153,9 @@ export default function ServicesSection() {
         </div>
 
         <div className="text-center mt-12 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#termin" className="btn-primary">
+          <button onClick={() => openBookingModal()} className="btn-primary">
             Behandlung reservieren
-          </a>
+          </button>
           <Link href="/analysen" className="btn-outline-dark">
             Analysen & Gesundheitsberatung
           </Link>

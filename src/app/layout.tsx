@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Lato } from "next/font/google";
+import { BookingModalProvider } from "@/components/BookingModalContext";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -30,7 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className={`${playfair.variable} ${lato.variable}`}>
-      <body>{children}</body>
+      <body>
+        <BookingModalProvider>{children}</BookingModalProvider>
+      </body>
     </html>
   );
 }
